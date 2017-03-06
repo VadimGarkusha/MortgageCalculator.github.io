@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Vadym Harkusha 300909484 | Assignment 1-->
+
+    <title>Mortgage Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="javascript/Functions.js">
+    </script>
+
+</head>
+
+<body class="row">
+
+    <div id="header" class="col-sm-12 col-xs-12 col-sm-12 col-lg-12"><img id="imgHeader" class="img-responsive" src="images/head.jpg" alt="Header"></div>
+
+    <br>
+
+
+    <div id="Main" class="col-sm-12 col-xs-12 col-sm-12 col-lg-12">
+        <div class="parallax col-sm-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+        <div class="parallax1 col-sm-14 col-xs-4 col-sm-4 col-lg-4"></div>
+
+        <div id="Calculator" class="row col-sm-4 col-xs-4 col-sm-4 col-lg-4 container">
+            <h2 class="text-center" id="title">Mortgage Calculator</h2>
+
+
+            <form method="post" action="" class="form-horizontal">
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <h4 class="text-right">Mortgage Amount:</h4>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <input class="field form-control" type="text" id="mortgageAmount" name="amount" required autocomplete="off" maxlength="40" placeholder="Enter Mortgage Amount" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <h4 class="text-right">Down Payment Option:</h4>
+                    </div>
+                    <div id="radio" class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 ">
+                        <label class="radio-inline" id="firstRadio"><input id="paymentOption1" type="radio" name="paymentOption" value="5" onclick="CalculateDownPayment(document.getElementById('mortgageAmount').value)" />5%</label>
+                        <label class="radio-inline"><input id="paymentOption2"  type="radio" name="paymentOption" value="10" onclick="CalculateDownPayment(document.getElementById('mortgageAmount').value)" />10%</label>
+                        <label class="radio-inline"><input id="paymentOption3"  type="radio" name="paymentOption" value="15" onclick="CalculateDownPayment(document.getElementById('mortgageAmount').value)" />15%</label>
+                        <label class="radio-inline"><input id="paymentOption4"  type="radio" name="paymentOption" value="20" onclick="CalculateDownPayment(document.getElementById('mortgageAmount').value)" />20%</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <h4 class="text-right">Down Payment:</h4>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <p id="downPayment" class="form-control">&nbsp;Choose down payment option to calculate value</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <h4 class="text-right">Amortization:</h4>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <select class="field form-control" id="select">
+                      <option class="field" id="selectOption1" value="25years">25 years</option>
+                      <option class="field" id="selectOption2" value="30years">30 years</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <h4 class="text-right">Interest Rate:</h4>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <input type="text" class="field form-control" id="interestRate" name="interestRate" required="required" maxlength="40" placeholder="Enter Decimal" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 phoneDiv">
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding" style="margin-bottom: 10px!important;">
+                        <h4 class="text-right">Monthly Payment:</h4>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-sm-6 col-lg-6 Cpadding">
+                        <p id="monthPayment" class="form-control">&nbsp;Press button to calculate value</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12 col-sm-12 col-lg-12 Cpadding">
+                    <center><input id="button" type="button" value="Calculate Mounthly Payment" onclick="CalculateMonthlyPaymment(rate=document.getElementById('interestRate').value,document.getElementById('mortgageAmount').value)"></center>
+                </div>
+            </form>
+
+        </div>
+
+
+
+        <div class="parallax1 col-sm-14 col-xs-4 col-sm-4 col-lg-4"></div>
+
+        <div class="parallax col-sm-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+    </div>
+
+
+
+
+    <div id="Footer" class="col-sm-12 col-xs-12 col-sm-12 col-lg-12">
+        <h6>&copy; Copyright Centennial College | COMP 125 <br>Harkusha Vadym | 300909484</h6>
+    </div>
+
+</body>
+
+</html>
